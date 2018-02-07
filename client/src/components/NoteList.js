@@ -30,7 +30,7 @@ class NoteList extends Component{
                     { 
                          this.props.note.map(function(s,index){
                              return(
-                                     <Note info ={s} key ={index}/>
+                                     <Note key={index} info ={s} id ={index}/>
                              )         
                          }) 
                      }

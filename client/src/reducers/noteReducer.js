@@ -1,7 +1,8 @@
 
 const noteReducers = (state= [{
-    title:"",
-    content :""
+    title:"New Note",
+    content :"Click here to edit...",
+    id:0
 }], action) => {
 
     switch(action.type){
@@ -11,7 +12,9 @@ const noteReducers = (state= [{
             ...state,
             {
                 title: action.payload.title,
-                content: action.payload.content
+                content: action.payload.content,
+                id: action.id++
+
             }
             
         ]
@@ -19,11 +22,30 @@ const noteReducers = (state= [{
         break;
 
         case "UPDATE_NOTE":
-        state = {
-            title: action.payload.title,
-            content: action.content
-        };
+        var id = action.id;
+        var newState = [
+            ...state.slice(0, id),
+            Object.assign({}, state[id], action.payload),
+            ...state.slice(id+1)
+        ]
+
+         state = newState;
+       
         break;
+
+        case "DELETE_NOTE":
+        console.log("State before delete",state);
+         id = action.id;
+
+         state = state.filter(function( obj ) {
+            return obj.id !== id;
+        });
+        //  state = [...state.splice(id,1)]
+        //  console.log("After Slice", state);
+        break;
+
+      
+      
 
         default:
         return state;
