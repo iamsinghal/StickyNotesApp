@@ -18,9 +18,6 @@ import {deleteNote} from '../actions/noteActions';
         this.setState({editFlag:false})
 
         return {title : this.refs.newTitle.value, content: this.refs.newContent.value, id:this.props.info.id }
-
-       
-
     }
 
     edit(){

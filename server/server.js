@@ -35,6 +35,33 @@ app.get('/getNotes', function(req, res){
         session.close();
 })
 
+//.run(`Match(n:Note) Where n.id >= toInteger({start}) RETURN n as note ORDER BY (n.id) ({order}) LIMIT toInteger({limit})`, {start, order, limit})
+
+
+
+app.get('/fetchNotes/:startFrom/:limit/:order', function(req, res){
+    var note = [];
+    var limit = req.params.limit
+    var start = req.params.startFrom
+    var order = req.params.order
+    session
+        .run(`Match(n:Note) Where n.id >= ${start} RETURN n as note ORDER BY (n.id) ${order} LIMIT ${limit}`,{start, order, limit})
+        .then(result =>{
+            result.records.forEach(element => {
+                note.push(element._fields[0].properties);
+            });
+      
+            session.close();
+            
+        return res.json(note);
+        
+        })
+        .catch(console.log("It failed"));
+
+    
+
+})
+
 app.post('/addNote', function(req, res){
 
     var title = req.body.title;

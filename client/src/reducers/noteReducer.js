@@ -97,7 +97,13 @@ const noteReducers = (state= [{
             state =notes;
             break;
 
+        case "FETCH_NOTES_FULFILLED":
+             notes = []
 
+            notes = action.payload;
+
+            state =notes;
+            break;
 
         default:
         return state;
