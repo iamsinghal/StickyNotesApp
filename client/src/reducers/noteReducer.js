@@ -25,7 +25,7 @@ const noteReducers = (state= [{
             {
                 title: action.payload.title,
                 content: action.payload.content,
-                id: action.id++
+                id: action.id
 
             }
             
@@ -46,14 +46,28 @@ const noteReducers = (state= [{
             console.log("Posted", res);
         })
 
-        var id = action.id;
-        var newState = [
-            ...state.slice(0, id),
-            Object.assign({}, state[id], action.payload),
-            ...state.slice(id+1)
-        ]
+        var id = action.payload.id;
+        var obj = {}
 
-         state = newState;
+
+        state.forEach((val, i)=>{
+            if(id === val.id){
+                val.title = action.payload.title;
+                val.content = action.payload.content;
+                // index = i;
+
+            }
+            obj = state;
+        })
+
+        // var newState = [
+        //     ...state.slice(0, index),
+        //     Object.assign({}, obj, action.payload),
+        //     ...state.slice(index+1)
+        // ]
+
+
+         state = obj;
        
         break;
 
