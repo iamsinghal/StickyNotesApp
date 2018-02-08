@@ -36,13 +36,14 @@ app.get('/getNotes', function(req, res){
 })
 
 app.post('/addNote', function(req, res){
-    var note = [];
-    var name = req.body.name;
-    var tagline = req.body.tagline;
+
+    var title = req.body.title;
+    var content = req.body.content;
+    var id = req.body.id;
     
-    var query = `Create(n:Note{title:{name}, content : {tagline}})`;
+    var query = `Create(n:Note{title:{title}, content : {content} , id : {id}})`;
     session
-        .run(query,{name,tagline})
+        .run(query,{title, content, id})
         .then(result =>{
            console.log("Successfully added into db");
        
@@ -54,12 +55,32 @@ app.post('/addNote', function(req, res){
         session.close()
 })
 
+app.post('/updateNote', function(req, res){
+
+    var title = req.body.title;
+    var content = req.body.content;
+    var id = req.body.id;
+    
+    var query = `Match(n:Note{id:{id}}) Set n.title = {title} Set n.content = {content}`;
+    session
+        .run(query,{id, title, content})
+        .then(result =>{
+           console.log("Successfully added into db");
+       
+           return res.send("Success");
+        
+        })  
+        .catch(console.log("It failed"));
+
+        session.close()
+})
+
 app.delete('/deleteNote', function(req, res){
-    var name = req.body.name;
-    var query =`Match(n:Note{title:{name}}) Detach Delete n`;
+    var id = req.body;
+    var query =`Match(n:Note{id:{id}}) Detach Delete n`;
 
     session
-    .run(query, {name})
+    .run(query, id)
     .then( result =>{
         console.log("Deleted...");
         return res.send("Deleted");

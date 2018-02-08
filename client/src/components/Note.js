@@ -17,7 +17,7 @@ import {deleteNote} from '../actions/noteActions';
         
         this.setState({editFlag:false})
 
-        return {title : this.refs.newTitle.value, content: this.refs.newContent.value, id:this.props.id }
+        return {title : this.refs.newTitle.value, content: this.refs.newContent.value, id:this.props.info.id }
 
        
 
@@ -43,7 +43,7 @@ import {deleteNote} from '../actions/noteActions';
 
         return(
             <div>
-            <button className="pull-right text-uppercase delete-button" onClick={() => this.props.deleteNote({title : this.props.info.title, content: this.props.info.content, id:this.props.id })} >&times;</button>
+            <button className="pull-right text-uppercase delete-button" onClick={() => this.props.deleteNote({title : this.props.info.title, content: this.props.info.content, id:this.props.info.id })} >&times;</button>
             
                 <div className="panel panel-default" onClick={()=> this.edit()}>
                  <div className="panel-heading">
