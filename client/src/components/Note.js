@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {updateNote} from '../actions/noteActions';
 import {deleteNote} from '../actions/noteActions';
+import Draggable from 'react-draggable';
 
  class Note extends Component{
         constructor(props){
             super(props);
             this.state = {
-                editFlag : false
+                editFlag : false,
+                activeDrags : 0
             }
         }
 
@@ -25,6 +27,14 @@ import {deleteNote} from '../actions/noteActions';
         console.log("Clicked");
     }
 
+    onStart() {
+        this.setState({activeDrags: ++this.state.activeDrags});
+      }
+    
+      onStop() {
+        this.setState({activeDrags: --this.state.activeDrags});
+      }
+
     renderForm(){ 
         return(
                     <div defaultValue={this.props}> 
@@ -37,9 +47,11 @@ import {deleteNote} from '../actions/noteActions';
     }
 
     renderDisplay(){
-
+         this.dragHandlers = {onStart: this.onStart.bind(this), onStop: this.onStop.bind(this)};
         return(
+            <Draggable {...this.dragHandlers}>
             <div>
+                <p> Click here to drag</p>
             <button className="pull-right text-uppercase delete-button" onClick={() => this.props.deleteNote({title : this.props.info.title, content: this.props.info.content, id:this.props.info.id })} >&times;</button>
             
                 <div className="panel panel-default" onClick={()=> this.edit()}>
@@ -51,6 +63,7 @@ import {deleteNote} from '../actions/noteActions';
                 </div>
                 </div>
             </div>
+            </Draggable>
             )
 
     }

@@ -3,6 +3,7 @@ import {getNotes} from '../actions/noteActions';
 import {fetchNotes} from '../actions/noteActions'
 import {connect} from 'react-redux';
 import Note from './Note';
+// import Draggable from 'react-draggable';
 
 
 class NoteList extends Component{
@@ -10,8 +11,17 @@ class NoteList extends Component{
     constructor(props) {
         super(props);
         props =this
+        
     }
     
+
+    // onStart() {
+    //     this.setState({activeDrags: ++this.state.activeDrags});
+    //   }
+    
+    //   onStop() {
+    //     this.setState({activeDrags: --this.state.activeDrags});
+    //   }
 
     fetch(){
 
@@ -26,6 +36,7 @@ class NoteList extends Component{
     }
 
    render() {
+    // const dragHandlers = {onStart: this.onStart, onStop: this.onStop};
     return (
      <div> 
          <button onClick ={()=> this.props.getNotes()}> Show All Notes</button> 
@@ -44,7 +55,7 @@ class NoteList extends Component{
                     { 
                          this.props.note.map(function(s,index){
                              return(
-                                     <Note key={index} info ={s} id ={index}/>
+                                     <Note  key={index} info ={s} id ={index}/>
                              )         
                          }) 
                      }
