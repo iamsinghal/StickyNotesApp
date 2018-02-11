@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {addNote} from '../actions/noteActions';
+import '../App.css';
+
 
  let AddNote = ({dispatch}) =>{
   
@@ -12,7 +14,7 @@ import {addNote} from '../actions/noteActions';
     let title, content
 
         return(
-            <form className="form" onSubmit={e => {
+            <form className="add-box" onSubmit={e => {
                 e.preventDefault()
                 if (!title.value.trim() || !content.value.trim() ) {
                   return
@@ -24,8 +26,8 @@ import {addNote} from '../actions/noteActions';
                 title.value = ''
                 content.value =''
               }}>
-
-                <div className="form-group">
+                <div >  
+                <div>
                     <label className="control-label" htmlFor="name">Title:</label> 
                     <input type="text" className="form-control" id="name" name="name" ref={node => { title = node }} placeholder="Title" />                    
                 </div>
@@ -35,6 +37,7 @@ import {addNote} from '../actions/noteActions';
                 </div>
                 <div className="form-group">
                     <button className="btn" type="submit">Add Note</button>
+                </div>
                 </div>
             </form>
         )

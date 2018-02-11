@@ -37,9 +37,14 @@ import Draggable from 'react-draggable';
 
     renderForm(){ 
         return(
-                    <div defaultValue={this.props}> 
-                        <input ref = "newTitle" defaultValue ={this.props.info.title} /> 
-                        <textarea ref = "newContent" defaultValue={this.props.info.content}/>
+                    <div className="notes-box" defaultValue={this.props}> 
+                        <div className="edit-field"> 
+                             <input type="text" className="form-control" id="name" name="name" ref = "newTitle" defaultValue ={this.props.info.title} />
+                        </div> 
+                        <br />
+                        <div className="edit-field"> 
+                        <textarea type="text" className="form-control" id="name" name="name" ref = "newContent" defaultValue={this.props.info.content}/>
+                        </div> <br />
                         <button onClick= {() =>this.props.updateNote(this.update())}> Update</button>
                     </div>
 
@@ -50,9 +55,9 @@ import Draggable from 'react-draggable';
          this.dragHandlers = {onStart: this.onStart.bind(this), onStop: this.onStop.bind(this)};
         return(
             <Draggable {...this.dragHandlers}>
-            <div>
-                <p> Click here to drag</p>
-            <button className="pull-right text-uppercase delete-button" onClick={() => this.props.deleteNote({title : this.props.info.title, content: this.props.info.content, id:this.props.info.id })} >&times;</button>
+            <div className="notes-box">
+                <span className="cursor"> Click here to drag   </span>
+            <button className="close-button" onClick={() => this.props.deleteNote({title : this.props.info.title, content: this.props.info.content, id:this.props.info.id })} >&times;</button>
             
                 <div className="panel panel-default" onClick={()=> this.edit()}>
                  <div className="panel-heading">

@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import {getNotes} from '../actions/noteActions';
 import {fetchNotes} from '../actions/noteActions'
 import {connect} from 'react-redux';
-import Note from './Note';
-// import Draggable from 'react-draggable';
 
 
-class NoteList extends Component{
+class NotesTools extends Component{
 
     constructor(props) {
         super(props);
@@ -27,17 +25,21 @@ class NoteList extends Component{
     }
 
    render() {
-    // const dragHandlers = {onStart: this.onStart, onStop: this.onStop};
     return (
-     <div className="noteList"> 
-            <div > 
-                    { 
-                         this.props.note.map(function(s,index){
-                             return(
-                                     <Note  key={index} info ={s} id ={index}/>
-                             )         
-                         }) 
-                     }
+     <div> 
+         <div className="tool-box">
+         <button onClick ={()=> this.props.getNotes()}> Show All Notes</button> 
+         <br />
+         <br />
+         <label> Start From </label> <input ref= "startFrom" type="text" /> 
+         <label > Limit </label> <input ref="limit" type="text" /> 
+
+        <select ref = {(input)=> this.menu = input}>
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+
+         <button onClick={()=> this.props.fetchNotes(this.fetch())}> Fetch </button>
          </div>
       
     </div>
@@ -70,4 +72,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps) (NoteList);
+export default connect(mapStateToProps,mapDispatchToProps) (NotesTools);
