@@ -120,6 +120,6 @@ app.delete('/deleteNote', function(req, res){
 });
 
 // app.use(express.static(path.join(__dirname,"../app/dist")));
-app.listen(8888,function(){
-    console.log("Started listening on port", 8888);
+app.listen(80,function(){
+    console.log("Started listening on port", 80);
 })
