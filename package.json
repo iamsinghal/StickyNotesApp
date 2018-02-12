@@ -3,9 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "client": "cd client && npm start",
-    "nodemodules": "cd client && npm install",
     "server": "nodemon server.js",
-    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\" \"yarn nodemodules\""
+    "start": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "dependencies": {
     "express": "^4.16.2",
