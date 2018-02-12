@@ -35,7 +35,6 @@ app.get('/getNotes', function(req, res){
         session.close();
 })
 
-//.run(`Match(n:Note) Where n.id >= toInteger({start}) RETURN n as note ORDER BY (n.id) ({order}) LIMIT toInteger({limit})`, {start, order, limit})
 
 
 
