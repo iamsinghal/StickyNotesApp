@@ -27,7 +27,6 @@ class NoteList extends Component{
     }
 
    render() {
-    // const dragHandlers = {onStart: this.onStart, onStop: this.onStop};
     return (
      <div className="noteList"> 
             <div > 
