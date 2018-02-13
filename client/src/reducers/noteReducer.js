@@ -1,5 +1,6 @@
 
 import axios from 'axios';
+import {apiURL} from '../config';
 
 const noteReducers = (state= [{
     title:"New Note",
@@ -16,7 +17,7 @@ const noteReducers = (state= [{
             id: action.id
         }
         axios
-        .post('http://localhost:8888/addNote/',param)
+        .post(`${apiURL}/note/add`,param)
         .then(res =>{
             console.log("Posted", res);
         })
@@ -41,7 +42,7 @@ const noteReducers = (state= [{
             id: action.payload.id
         }
         axios
-        .post('http://localhost:8888/updateNote/',param)
+        .put(`${apiURL}/note/${param.id}`,param)
         .then(res =>{
             console.log("Posted", res);
         })
@@ -54,18 +55,10 @@ const noteReducers = (state= [{
             if(id === val.id){
                 val.title = action.payload.title;
                 val.content = action.payload.content;
-                // index = i;
 
             }
             obj = state;
         })
-
-        // var newState = [
-        //     ...state.slice(0, index),
-        //     Object.assign({}, obj, action.payload),
-        //     ...state.slice(index+1)
-        // ]
-
 
          state = obj;
        
@@ -75,7 +68,7 @@ const noteReducers = (state= [{
 
         param = action.payload.id;
         axios
-        .delete('http://localhost:8888/deleteNote/',{data : { id : param}})
+        .delete(`${apiURL}/note/${param}`,{data : { id : param}})
         .then(res =>{
             console.log("Delete request", res);
         })

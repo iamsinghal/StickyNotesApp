@@ -1,5 +1,1 @@
-export const Config = () =>{
-
- serverUrl : "http://localhost:8888"
-
-}
+export const apiURL = "http://localhost:8888"

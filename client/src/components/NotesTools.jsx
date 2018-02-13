@@ -2,23 +2,25 @@ import React, { Component } from 'react';
 import {getNotes} from '../actions/noteActions';
 import {fetchNotes} from '../actions/noteActions'
 import {connect} from 'react-redux';
-import Note from './Note';
-// import Draggable from 'react-draggable';
 
 
-class NoteList extends Component{
+class NotesTools extends Component{
 
     constructor(props) {
         super(props);
         props =this
         
     }
+
+    componentDidMount(){
+        this.props.getNotes();
+    }
    
     fetch(){
 
         var limit = this.refs.limit.value === "" ? 10 : this.refs.limit.value ;
         var startFrom = this.refs.startFrom.value === "" ? 0 : this.refs.startFrom.value ;
-        var orderBy = this.menu.value;
+        var orderBy = this.menu.value === "" ? "ASC" : this.menu.value ;
         this.refs.limit.value = '';
         this.refs.startFrom.value = '';
         this.menu.value = "ASC";
@@ -28,15 +30,20 @@ class NoteList extends Component{
 
    render() {
     return (
-     <div className="noteList"> 
-            <div > 
-                    { 
-                         this.props.note.map(function(s,index){
-                             return(
-                                     <Note  key={index} info ={s} id ={index}/>
-                             )         
-                         }) 
-                     }
+     <div> 
+         <div className="tool-box">
+         <button onClick ={()=> this.props.getNotes()}> Show All Notes</button> 
+         <br />
+         <br />
+         <label> Start From </label> <input ref= "startFrom" type="text" /> 
+         <label > Limit </label> <input ref="limit" type="text" /> 
+
+        <select ref = {(input)=> this.menu = input}>
+            <option value="asc">Ascending</option>
+            <option value="desc">Descending</option>
+        </select>
+
+         <button onClick={()=> this.props.fetchNotes(this.fetch())}> Fetch </button>
          </div>
       
     </div>
@@ -49,7 +56,7 @@ const mapStateToProps = (state) => {
     
     console.log(state);
     return {
-        n: state.getNotesReducers,
+        // n: state.requestFulfilledReducers,
         note: state.noteReducers
 
 
@@ -69,4 +76,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps) (NoteList);
+export default connect(mapStateToProps,mapDispatchToProps) (NotesTools);

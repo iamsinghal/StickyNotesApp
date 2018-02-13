@@ -8,17 +8,13 @@ import Draggable from 'react-draggable';
         constructor(props){
             super(props);
             this.state = {
-                editFlag : false,
-                activeDrags : 0
+                editFlag : false
             }
         }
-
-
     
     update(){
         
         this.setState({editFlag:false})
-
         return {title : this.refs.newTitle.value, content: this.refs.newContent.value, id:this.props.info.id }
     }
 
@@ -27,14 +23,7 @@ import Draggable from 'react-draggable';
         console.log("Clicked");
     }
 
-    onStart() {
-        this.setState({activeDrags: ++this.state.activeDrags});
-      }
-    
-      onStop() {
-        this.setState({activeDrags: --this.state.activeDrags});
-      }
-
+  
     renderForm(){ 
         return(
                     <div className="notes-box" defaultValue={this.props}> 
@@ -50,11 +39,9 @@ import Draggable from 'react-draggable';
 
         )
     }
-
     renderDisplay(){
-         this.dragHandlers = {onStart: this.onStart.bind(this), onStop: this.onStop.bind(this)};
         return(
-            <Draggable {...this.dragHandlers}>
+            <Draggable > 
             <div className="notes-box">
                 <span className="cursor"> Click here to drag   </span>
             <button className="close-button" onClick={() => this.props.deleteNote({title : this.props.info.title, content: this.props.info.content, id:this.props.info.id })} >&times;</button>
@@ -86,7 +73,6 @@ const mapStateToProps = (state) => {
     
     console.log(state);
     return {
-        // n: state.getNotesReducers,
         note: state.noteReducers
 
 
