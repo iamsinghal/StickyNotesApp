@@ -11,9 +11,9 @@ var driver = neo4j.driver('bolt://localhost:7687', neo4j.auth.basic('neo4j','neo
 var session =  driver.session();
 
 
-app.get('/api',function(req,res){
+app.get('/',function(req,res){
 
-    res.send({express :'Hello from Express'});
+    res.sendfile(path.join(__dirname, "../client/build/index.html"));
 })
 
     
@@ -119,7 +119,8 @@ app.delete('/deleteNote', function(req, res){
     
 });
 
-// app.use(express.static(path.join(__dirname,"../app/dist")));
-app.listen(80,function(){
+app.use(express.static(path.join(__dirname,"../client/build")));
+
+app.listen(process.env.PORT || 8888,function(){
     console.log("Started listening on port", 80);
 })
