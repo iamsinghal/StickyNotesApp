@@ -18,21 +18,28 @@ export const getNotes = (payload =1 ) => ({
   type: 'GET_NOTES',
   payload : new Promise((resolve, reject) => {
     var notes =[];
-    axios
-    .get('http://localhost:8888/getNotes')
-    .then( res =>{
-            res.data.forEach(obj=>{
-                var note = {
-                    title: obj.title,
-                    content : obj.content,
-                    id: obj.id
-                }
+  //   axios
+  //   .get('http://localhost:8888/getNotes')
+  //   .then( res =>{
+  //           res.data.forEach(obj=>{
+  //               var note = {
+  //                   title: obj.title,
+  //                   content : obj.content,
+  //                   id: obj.id
+  //               }
 
-                notes.push(note);
-            })
-            resolve(notes);
-        }
-   )
+  //               notes.push(note);
+  //           })
+  //           resolve(notes);
+  //       }
+  //  )
+
+  axios
+  .get('https://sefskhromf.localtunnel.me/abc')
+  .then( res =>{
+          console.log("---------->>>>", res.data);
+      }
+ )
  
    
   })
