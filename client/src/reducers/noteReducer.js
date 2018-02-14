@@ -19,7 +19,6 @@ const noteReducers = (state = [
             axios
                 .post(`${apiURL}/note/add`, param)
                 .then(res => {
-                    console.log("Posted", res);
                 });
             state = [
                 ...state, {
