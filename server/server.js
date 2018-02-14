@@ -19,7 +19,7 @@ app.all('/', function(req, res, next) {
 
 app.get('/',function(req,res){
 
-    res.sendfile(path.join(__dirname, "../client/build/index.html"));
+    res.sendFile(path.join(__dirname, "../client/build/index.html"));
 })
 
     
@@ -144,6 +144,6 @@ app.delete('/note/:id', function(req, res){
 
 app.use(express.static(path.join(__dirname,"../client/build")));
 
-app.listen(process.env.PORT || 8888,function(){
+app.listen(process.env.PORT || 9000,function(){
     console.log("Started listening on port", 80);
 })
