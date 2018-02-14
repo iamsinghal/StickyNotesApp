@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import {getNotes} from '../actions/noteActions';
-import {fetchNotes} from '../actions/noteActions'
 import {connect} from 'react-redux';
 import Note from './Note.jsx';
 // import Draggable from 'react-draggable';
@@ -12,20 +10,6 @@ class NoteList extends Component{
         super(props);
         props =this
         
-    }
-
-
-   
-    fetch(){
-
-        var limit = this.refs.limit.value === "" ? 10 : this.refs.limit.value ;
-        var startFrom = this.refs.startFrom.value === "" ? 0 : this.refs.startFrom.value ;
-        var orderBy = this.menu.value;
-        this.refs.limit.value = '';
-        this.refs.startFrom.value = '';
-        this.menu.value = "ASC";
-
-        return {limit: limit, startFrom: startFrom, orderBy : orderBy}
     }
 
    render() {
@@ -57,17 +41,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-const mapDispatchToProps = (dispatch) => {
-    console.log("From Get notes in notejs");
-    
-    return {
-        getNotes : () =>{
-            dispatch(getNotes());
-        },
-        fetchNotes : (value) =>{
-            dispatch(fetchNotes(value));
-        }
-    }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps) (NoteList);
+export default connect(mapStateToProps) (NoteList);

@@ -98,6 +98,8 @@ const noteReducers = (state= [{
             state =notes;
             break;
 
+      
+
         default:
         return state;
 

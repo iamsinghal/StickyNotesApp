@@ -4,26 +4,31 @@ import {apiURL} from '../config';
 
 let nextNodeId =0;
 
-// const getId = () =>{
-//         axios
-//         .get(`${apiURL}/note/getId`)
-//         .then( res =>{
-//                 res.data.forEach(obj=>{
-//                     var note = {
-//                         title: obj.title,
-//                         content : obj.content,
-//                         id: obj.id
-//                     }
-//                     nextNodeId = note.id
-//                 })
-//             }
-//        )
-// }
-// let lastId = getId(); 
+
+export const getId = () => ({
+    type: 'GET_ID',
+    payload : new Promise((resolve, reject) => {
+        var notes =[];
+        axios
+        .get(`${apiURL}/note/getId`)
+        .then( res =>{
+                res.data.forEach(obj=>{
+                    var note = {
+                        title: obj.title,
+                        content : obj.content,
+                        id: obj.id
+                    }
+                    notes.push(note);
+                })
+                resolve(notes);
+            }
+       )
+      })
+  })
 
 export const addNote = (payload) => ({
   type: 'ADD_NOTE',
-  id: nextNodeId++,
+  id: payload.id,
   payload
 })
 
