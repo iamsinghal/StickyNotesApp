@@ -29,9 +29,6 @@ class NoteList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("From Get notes in notejs");
-
-    console.log(state);
     return {note: state.noteReducers}
 }
 

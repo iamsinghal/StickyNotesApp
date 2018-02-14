@@ -20,7 +20,6 @@ class Note extends Component {
 
     edit() {
         this.setState({editFlag: true})
-        console.log("Clicked");
     }
 
     renderForm() {
@@ -87,23 +86,16 @@ class Note extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log("From Get notes in notejs");
-
-    console.log(state);
     return {note: state.noteReducers}
 }
 
 const mapDispatchToProps = (dispatch) => {
-    console.log("From Get notes in notejs");
-
     return {
         updateNote: (value) => {
-            console.log(value);
             dispatch(updateNote(value));
 
         },
         deleteNote: (value) => {
-            console.log("From delete", value);
             dispatch(deleteNote(value));
         }
     }

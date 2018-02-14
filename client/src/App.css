@@ -94,6 +94,7 @@ width: 300px;
 
 .close-button{
   float: right;
+  border-radius: 30px;
 }
 .edit-field{
   width: 160px;
